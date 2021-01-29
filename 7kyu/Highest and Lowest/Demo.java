@@ -1,21 +1,9 @@
-import java.util.Arrays;
+import static java.util.Arrays.stream;
 
 public class Kata {
   public static String highAndLow(String numbers) {
-    String[] temp = numbers.split(" ");
-    int minValue = Integer.parseInt(temp[0]);
-    int maxValue = Integer.parseInt(temp[0]);
-    for(int i=1;i < temp.length;i++){
-      if(Integer.parseInt(temp[i]) > maxValue){
-        maxValue = Integer.parseInt(temp[i]);
-      }
-    }
-    for(int i=1;i<temp.length;i++) {
-      if (Integer.parseInt(temp[i]) < minValue) {
-         minValue = Integer.parseInt(temp[i]);
-      }
-    }
-    return "" + maxValue + " " + minValue;
+    var stats = stream(numbers.split("\\s")).mapToInt(Integer::parseInt).summaryStatistics();
+    return stats.getMax() + " " + stats.getMin();
   }
 }
 
